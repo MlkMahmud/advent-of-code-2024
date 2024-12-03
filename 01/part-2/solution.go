@@ -4,6 +4,6 @@ import (
 	"fmt"
 )
 
-func Run() {
+func Solution() {
 	fmt.Println("It's always day one.....2")
 }

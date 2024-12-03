@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"log"
 
-	dayOnePtOne "github.com/MlkMahmud/advent-of-code-2024/day-01/part-1"
-	dayOnePtTwo "github.com/MlkMahmud/advent-of-code-2024/day-01/part-2"
+	dayOnePtOne "github.com/MlkMahmud/advent-of-code-2024/01/part-1"
+	dayOnePtTwo "github.com/MlkMahmud/advent-of-code-2024/01/part-2"
 )
 
 var commands = map[string]func(){
-	"day-1-part-1": dayOnePtOne.Run,
-	"day-1-part-2": dayOnePtTwo.Run,
+	"day-1-part-1": dayOnePtOne.Solution,
+	"day-1-part-2": dayOnePtTwo.Solution,
 }
 
 func validateOptions(day, part int) bool {
