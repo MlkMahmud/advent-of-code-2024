@@ -15,7 +15,7 @@ func parseInput() ([]int64, []int64, error) {
 	var leftList []int64
 	var rightList []int64
 
-	file, err := os.Open("01/part-1/input.txt")
+	file, err := os.Open("01/input.txt")
 
 	if err != nil {
 		return nil, nil, err
