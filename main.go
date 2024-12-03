@@ -27,7 +27,7 @@ func validateOptions(day, part int) bool {
 }
 
 func printHelpMessage() {
-	log.Fatalln(("Usage:\n go run main.go --day <1-25> --part <1|2>\n\nOptions:\n --day\tSpecifies the day of the month. Must be a number between 1 and 25\n --part\tSpecifies the part. Must be either 1 or 2.\n\nNote:\n Both arguments are mandatory. Ensure you provide valid values for both \"--day\" and \"--part\".\n"))
+	log.Fatalln(("Usage:\n go run main.go --day <1-25> --part <1|2>\n\nOptions:\n --day\tSpecifies the day of the month. Must be a number between 1 and 25\n --part\tSpecifies the part. Must be either 1 or 2.\n\nNote:\n Both arguments are mandatory. Ensure you provide valid values for both \"--day\" and \"--part\"."))
 }
 
 func main() {
