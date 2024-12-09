@@ -1,4 +1,4 @@
-package part1
+package part2
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 )
 
 func Solution() {
-	safeReports, err := day02.Solution(false)
+	safeReports, err := day02.Solution(true)
 
 	if err != nil {
 		log.Fatal(err)
