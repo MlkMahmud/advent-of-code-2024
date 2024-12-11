@@ -10,7 +10,7 @@ import (
 	dayTwoPtOne "github.com/MlkMahmud/advent-of-code-2024/02/part-1"
 	dayTwoPtTwo "github.com/MlkMahmud/advent-of-code-2024/02/part-2"
 	dayThreePartOne "github.com/MlkMahmud/advent-of-code-2024/03/part-1"
-
+	dayThreePartTwo "github.com/MlkMahmud/advent-of-code-2024/03/part-2"
 )
 
 var commands = map[string]func(){
@@ -19,6 +19,7 @@ var commands = map[string]func(){
 	"day-2-part-1": dayTwoPtOne.Solution,
 	"day-2-part-2": dayTwoPtTwo.Solution,
 	"day-3-part-1": dayThreePartOne.Solution,
+	"day-3-part-2": dayThreePartTwo.Solution,
 }
 
 func validateOptions(day, part int) bool {
