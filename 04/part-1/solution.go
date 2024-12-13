@@ -6,44 +6,34 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"strings"
+
+	day04Utils "github.com/MlkMahmud/advent-of-code-2024/04"
 )
 
 var (
 	KEY_WORD_PATTERN = regexp.MustCompile(`(?i)^(xmas|samx)`)
 )
 
-func charAt(str string, index int) string {
-	if index < 0 || index > len(str)-1 {
-		return "."
-	}
-
-	return string(str[index])
-}
-
-func isKeywordMatch(word string) bool {
-	return KEY_WORD_PATTERN.MatchString(word)
-}
-
-func countMatches(grid []string) int {
+func countMatches(grid [4]string) int {
+	defaultChar := '.'
 	matches := 0
 
 	for i := 0; i < len(grid[0]); i++ {
-		if isKeywordMatch(grid[0][i:]) {
+		if day04Utils.IsKeywordMatch(grid[0][i:], KEY_WORD_PATTERN) {
 			matches += 1
 		}
 
-		if len(grid) == 4 {
-			if word := fmt.Sprintf("%s%s%s%s", charAt(grid[0], i), charAt(grid[1], i), charAt(grid[2], i), charAt(grid[3], i)); isKeywordMatch(word) {
-				matches += 1
-			}
+		if word := fmt.Sprintf("%c%c%c%c", day04Utils.CharAt(grid[0], i, defaultChar), day04Utils.CharAt(grid[1], i, defaultChar), day04Utils.CharAt(grid[2], i, defaultChar), day04Utils.CharAt(grid[3], i, defaultChar)); day04Utils.IsKeywordMatch(word, KEY_WORD_PATTERN) {
+			matches += 1
+		}
 
-			if word := fmt.Sprintf("%s%s%s%s", charAt(grid[0], i), charAt(grid[1], i+1), charAt(grid[2], i+2), charAt(grid[3], i+3)); isKeywordMatch(word) {
-				matches += 1
-			}
+		if word := fmt.Sprintf("%c%c%c%c", day04Utils.CharAt(grid[0], i, defaultChar), day04Utils.CharAt(grid[1], i+1, defaultChar), day04Utils.CharAt(grid[2], i+2, defaultChar), day04Utils.CharAt(grid[3], i+3, defaultChar)); day04Utils.IsKeywordMatch(word, KEY_WORD_PATTERN) {
+			matches += 1
+		}
 
-			if word := fmt.Sprintf("%s%s%s%s", charAt(grid[0], (len(grid[0])-1)-i), charAt(grid[1], (len(grid[1])-2)-i), charAt(grid[2], (len(grid[2])-3)-i), charAt(grid[3], (len(grid[0])-4)-i)); isKeywordMatch(word) {
-				matches += 1
-			}
+		if word := fmt.Sprintf("%c%c%c%c", day04Utils.CharAt(grid[0], (len(grid[0])-1)-i, defaultChar), day04Utils.CharAt(grid[1], (len(grid[1])-2)-i, defaultChar), day04Utils.CharAt(grid[2], (len(grid[2])-3)-i, defaultChar), day04Utils.CharAt(grid[3], (len(grid[0])-4)-i, defaultChar)); day04Utils.IsKeywordMatch(word, KEY_WORD_PATTERN) {
+			matches += 1
 		}
 
 	}
@@ -84,18 +74,14 @@ func Solution() {
 		log.Fatal(err)
 	}
 
-	if len(grid) < 4 {
-		fmt.Printf("Ans: %d\n", matches)
-		return
-	}
-
 	for i, gridLength := 0, len(grid); i < gridLength; i++ {
-		if i+3 >= gridLength {
-			matches += countMatches([]string{grid[i]})
-		} else {
-			arr := []string{grid[i], grid[i+1], grid[i+2], grid[i+3]}
-			matches += countMatches(arr)
-		}
+		arr := [4]string{}
+		arr[0] = grid[i]
+		arr[1] = day04Utils.SafeIndex(grid, i+1, strings.Repeat(".", len(grid[i])))
+		arr[2] = day04Utils.SafeIndex(grid, i+2, strings.Repeat(".", len(grid[i])))
+		arr[3] = day04Utils.SafeIndex(grid, i+3, strings.Repeat(".", len(grid[i])))
+
+		matches += countMatches(arr)
 	}
 
 	fmt.Printf("Ans: %d\n", matches)
