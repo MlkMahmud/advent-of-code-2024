@@ -1,10 +1,8 @@
 package part1
 
 import (
-	"bufio"
 	"fmt"
 	"log"
-	"os"
 	"regexp"
 	"strings"
 
@@ -32,7 +30,7 @@ func countMatches(grid [4]string) int {
 			matches += 1
 		}
 
-		if word := fmt.Sprintf("%c%c%c%c", day04Utils.CharAt(grid[0], (len(grid[0])-1)-i, defaultChar), day04Utils.CharAt(grid[1], (len(grid[1])-2)-i, defaultChar), day04Utils.CharAt(grid[2], (len(grid[2])-3)-i, defaultChar), day04Utils.CharAt(grid[3], (len(grid[0])-4)-i, defaultChar)); day04Utils.IsKeywordMatch(word, KEY_WORD_PATTERN) {
+		if word := fmt.Sprintf("%c%c%c%c", day04Utils.CharAt(grid[0], (len(grid[0])-1)-i, defaultChar), day04Utils.CharAt(grid[1], (len(grid[0])-2)-i, defaultChar), day04Utils.CharAt(grid[2], (len(grid[0])-3)-i, defaultChar), day04Utils.CharAt(grid[3], (len(grid[0])-4)-i, defaultChar)); day04Utils.IsKeywordMatch(word, KEY_WORD_PATTERN) {
 			matches += 1
 		}
 
@@ -41,32 +39,8 @@ func countMatches(grid [4]string) int {
 	return matches
 }
 
-func parseFile() ([]string, error) {
-	file, err := os.Open("04/input.txt")
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer file.Close()
-
-	grid := make([]string, 0)
-	scanner := bufio.NewScanner(file)
-
-	for scanner.Scan() {
-		line := scanner.Text()
-		grid = append(grid, line)
-	}
-
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-
-	return grid, nil
-}
-
 func Solution() {
-	grid, err := parseFile()
+	grid, err := day04Utils.ParseInput()
 
 	matches := 0
 
